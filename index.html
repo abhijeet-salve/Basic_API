@@ -1,0 +1,43 @@
+<html>
+	<head>
+		<title>JSON and API Test.</title>
+	</head>
+	<body>
+		<div>
+			<h4>JSON </h4>
+			<p id="d1">	sad	</p>
+		</div>
+	
+		<button onclick="func1()"> CALL API </button>
+	</body>
+	
+	
+	
+	
+	<script>
+
+
+		function func1() {
+			var request = new XMLHttpRequest();											// CREATING OBJECT OF XML HTTP REQUEST.
+
+			request.open('GET', 'https://ghibliapi.herokuapp.com/films', true);		    // OPEN THE REQUEST WITH OPEN() WITH METHOD & URL.
+
+
+			request.onload = function () {
+
+				// WE CAN ACCESS THE DATA INSIDE THE ONLOAD().
+				var data = JSON.parse(this.response);									// PARSE THE RESPONSE.
+
+				if (request.status >= 200 && request.status < 400) {
+					data.forEach(movie => {
+						console.log(movie.director);
+					});
+				} else {
+					console.log('error');
+				}
+			}
+
+			request.send();
+		}
+		</script>
+</html>
